@@ -24,65 +24,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 exports.__esModule = true;
-exports.Planet = void 0;
+exports.Favorite = void 0;
 var typeorm_1 = require("typeorm");
-var Favorite_1 = require("./Favorite");
-var Planet = /** @class */ (function (_super) {
-    __extends(Planet, _super);
-    function Planet() {
+var User_1 = require("./User");
+var Character_1 = require("./Character");
+var Planet_1 = require("./Planet");
+var Favorite = /** @class */ (function (_super) {
+    __extends(Favorite, _super);
+    function Favorite() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], Planet.prototype, "id");
+    ], Favorite.prototype, "id");
     __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Planet.prototype, "diameter");
+        typeorm_1.ManyToOne(function () { return User_1.User; }, function (user) { return user.favorite; }),
+        __metadata("design:type", User_1.User)
+    ], Favorite.prototype, "user");
     __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Planet.prototype, "rotation_period");
+        typeorm_1.ManyToOne(function () { return Character_1.Character; }, function (character) { return character.favorite; }),
+        __metadata("design:type", Character_1.Character)
+    ], Favorite.prototype, "character");
     __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Planet.prototype, "orbital_period");
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Planet.prototype, "gravity");
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Planet.prototype, "population");
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Planet.prototype, "climate");
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Planet.prototype, "terrain");
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", Number)
-    ], Planet.prototype, "surface_water");
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Planet.prototype, "description");
-    __decorate([
-        typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Planet.prototype, "urlImage");
-    __decorate([
-        typeorm_1.OneToMany(function () { return Favorite_1.Favorite; }, function (favorite) { return favorite.character; }),
-        __metadata("design:type", Array)
-    ], Planet.prototype, "favorite");
-    Planet = __decorate([
+        typeorm_1.ManyToOne(function () { return Planet_1.Planet; }, function (Planet) { return Planet.favorite; }),
+        __metadata("design:type", Planet_1.Planet)
+    ], Favorite.prototype, "planet");
+    Favorite = __decorate([
         typeorm_1.Entity()
-    ], Planet);
-    return Planet;
+    ], Favorite);
+    return Favorite;
 }(typeorm_1.BaseEntity));
-exports.Planet = Planet;
+exports.Favorite = Favorite;

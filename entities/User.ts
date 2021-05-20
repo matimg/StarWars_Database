@@ -1,7 +1,8 @@
 import {
     Entity, Column, PrimaryGeneratedColumn, ManyToMany,
-    BaseEntity, JoinTable
+    BaseEntity, JoinTable, OneToMany
 } from 'typeorm';
+import { Favorite } from './Favorite';
 
 // import {Planet} from "./Planet"
 @Entity()
@@ -20,6 +21,9 @@ export class User extends BaseEntity {
 
     @Column({ unique: true })
     password: string;
+
+    @OneToMany(() => Favorite, favorite => favorite.user)
+    favorite: Favorite[];
 
     // @ManyToMany(() => Planet)
     // @JoinTable()
